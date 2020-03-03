@@ -8,10 +8,19 @@ const cheerio = require('cheerio');
  */
 const parse = data => {
   const $ = cheerio.load(data);
-  const name = $('.section-main h2.restaurant-details__heading--title').text();
-  const experience = $('#experience-section > ul > li:nth-child(2)').text();
+  var names = [];
 
-  return {name, experience};
+  for (let i =1;i<=41;i++){
+      var nam =$('div:nth-child('+i+') > div > div.card__menu-content.js-match-height-content > h5 > a').text();
+      if (nam.length != 0 )
+      {
+        var name = nam.split('\n');
+        names.push(name[1].substring(16));
+      }
+  }
+
+
+  return names;
 };
 
 /**
